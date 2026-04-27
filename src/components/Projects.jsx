@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CustomEase } from 'gsap/CustomEase';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, CustomEase);
 
 export default function Projects({ items, reducedMotion }) {
   const sectionRef = useRef(null);
@@ -11,11 +12,16 @@ export default function Projects({ items, reducedMotion }) {
     const ctx = gsap.context(() => {
       if (reducedMotion) return;
 
+      CustomEase.create('rowSnap', '0.83, 0, 0.17, 1');
+
       gsap.from('.projects-title', {
-        x: 280,
-        skewX: 11,
-        scale: 1.18,
-        ease: 'none',
+        x: 320,
+        skewX: 12,
+        scale: 1.2,
+        letterSpacing: '0.1em',
+        clipPath: 'polygon(0 0, 100% 0, 100% 24%, 0 24%)',
+        transformOrigin: 'right center',
+        ease: 'rowSnap',
         scrollTrigger: {
           trigger: '.projects-title',
           scrub: true,
@@ -26,11 +32,15 @@ export default function Projects({ items, reducedMotion }) {
 
       gsap.utils.toArray('.project-row').forEach((row, index) => {
         gsap.from(row, {
-          x: index % 2 === 0 ? -220 : 220,
-          skewX: index % 2 === 0 ? -9 : 9,
-          rotate: index % 2 === 0 ? -2 : 2,
-          scale: 0.92,
-          ease: 'none',
+          x: index % 2 === 0 ? -240 : 240,
+          skewX: index % 2 === 0 ? -10 : 10,
+          rotate: index % 2 === 0 ? -2.5 : 2.5,
+          scale: 0.9,
+          clipPath: index % 2 === 0
+            ? 'polygon(0 0, 0 0, 0 100%, 0 100%)'
+            : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+          transformOrigin: index % 2 === 0 ? 'left center' : 'right center',
+          ease: 'rowSnap',
           scrollTrigger: {
             trigger: row,
             scrub: true,
@@ -40,7 +50,10 @@ export default function Projects({ items, reducedMotion }) {
         });
 
         gsap.to(row, {
-          x: index % 2 === 0 ? 16 : -16,
+          x: index % 2 === 0 ? 22 : -22,
+          letterSpacing: '0.01em',
+          transformOrigin: index % 2 === 0 ? 'left center' : 'right center',
+          ease: 'none',
           scrollTrigger: {
             trigger: row,
             scrub: true,

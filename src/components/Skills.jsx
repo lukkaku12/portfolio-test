@@ -16,8 +16,10 @@ export default function Skills({ groups, reducedMotion }) {
         y: 40,
         skewY: (index) => (index % 2 === 0 ? -6 : 6),
         scale: 0.9,
-        ease: 'none',
-        stagger: 0.06,
+        clipPath: 'polygon(0 0, 100% 0, 100% 16%, 0 16%)',
+        transformOrigin: (index) => (index % 2 === 0 ? 'left center' : 'right center'),
+        ease: 'expo.out',
+        stagger: 0.08,
         scrollTrigger: {
           trigger: '.skills-grid',
           scrub: true,

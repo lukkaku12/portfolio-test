@@ -12,10 +12,13 @@ export default function Experience({ items, reducedMotion }) {
       if (reducedMotion) return;
 
       gsap.from('.exp-head h2', {
-        x: -300,
+        x: -320,
         skewX: -12,
         scale: 1.2,
-        ease: 'none',
+        letterSpacing: '0.08em',
+        clipPath: 'polygon(0 0, 100% 0, 100% 26%, 0 26%)',
+        transformOrigin: 'left center',
+        ease: 'expo.out',
         scrollTrigger: {
           trigger: '.exp-head',
           scrub: true,
@@ -30,7 +33,9 @@ export default function Experience({ items, reducedMotion }) {
           y: 80,
           skewX: index % 2 === 0 ? -8 : 8,
           scale: 0.9,
-          ease: 'none',
+          clipPath: 'polygon(0 0, 100% 0, 100% 12%, 0 12%)',
+          transformOrigin: index % 2 === 0 ? 'left center' : 'right center',
+          ease: 'expo.out',
           scrollTrigger: {
             trigger: card,
             scrub: true,
@@ -41,6 +46,8 @@ export default function Experience({ items, reducedMotion }) {
 
         gsap.to(card, {
           y: -20,
+          letterSpacing: '0.01em',
+          ease: 'none',
           scrollTrigger: {
             trigger: card,
             scrub: true,

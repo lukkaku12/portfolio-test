@@ -22,10 +22,13 @@ export default function Contact({ reducedMotion }) {
 
       contactTl
         .from('.contact-card h2', {
-          x: -260,
+          x: -280,
           skewX: -10,
-          scale: 1.18,
-          ease: 'none'
+          scale: 1.2,
+          letterSpacing: '0.08em',
+          clipPath: 'polygon(0 0, 100% 0, 100% 20%, 0 20%)',
+          transformOrigin: 'left center',
+          ease: 'expo.out'
         })
         .from(
           '.contact-card p',
@@ -33,7 +36,9 @@ export default function Contact({ reducedMotion }) {
             x: 220,
             skewX: 8,
             scale: 0.92,
-            ease: 'none'
+            clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+            transformOrigin: 'right center',
+            ease: 'expo.out'
           },
           '<'
         )
@@ -43,7 +48,8 @@ export default function Contact({ reducedMotion }) {
             y: 80,
             scale: 0.7,
             skewY: -8,
-            ease: 'none'
+            transformOrigin: 'center bottom',
+            ease: 'expo.out'
           },
           '<0.05'
         );

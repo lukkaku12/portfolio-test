@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CustomEase } from 'gsap/CustomEase';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, CustomEase);
 
 const heroWords = ['Creative', 'Developer', '/', 'Portfolio'];
 
@@ -13,12 +14,29 @@ export default function Hero({ reducedMotion }) {
     const ctx = gsap.context(() => {
       if (reducedMotion) return;
 
+      CustomEase.create('studioFlow', '0.22, 1, 0.36, 1');
+
       gsap.from('.hero-word', {
-        x: (index) => (index % 2 === 0 ? -320 : 320),
-        y: (index) => (index % 2 === 0 ? 50 : -50),
-        skewX: (index) => (index % 2 === 0 ? -14 : 14),
-        scale: 1.25,
-        ease: 'none',
+        x: (index) => (index % 2 === 0 ? -340 : 340),
+        y: (index) => (index % 2 === 0 ? 70 : -70),
+        skewX: (index) => (index % 2 === 0 ? -15 : 15),
+        scale: 1.3,
+        transformOrigin: (index) => (index % 2 === 0 ? 'left center' : 'right center'),
+        stagger: 0.08,
+        ease: 'studioFlow',
+        scrollTrigger: {
+          trigger: '#inicio',
+          scrub: true,
+          start: 'top 80%',
+          end: 'top 30%'
+        }
+      });
+
+      gsap.from('.hero-title', {
+        letterSpacing: '0.28em',
+        clipPath: 'polygon(0 0, 100% 0, 100% 22%, 0 22%)',
+        transformOrigin: 'center top',
+        ease: 'studioFlow',
         scrollTrigger: {
           trigger: '#inicio',
           scrub: true,
@@ -28,10 +46,13 @@ export default function Hero({ reducedMotion }) {
       });
 
       gsap.from('.hero-subtitle', {
-        x: -260,
+        x: -280,
         skewX: -10,
-        scale: 1.1,
-        ease: 'none',
+        scale: 1.08,
+        letterSpacing: '0.08em',
+        clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
+        transformOrigin: 'left center',
+        ease: 'studioFlow',
         scrollTrigger: {
           trigger: '.hero-subtitle',
           scrub: true,
@@ -51,10 +72,11 @@ export default function Hero({ reducedMotion }) {
 
       titleTl
         .to('.hero-title', {
-          x: 35,
+          x: 45,
           skewY: 3,
-          scale: 0.95,
-          ease: 'none'
+          scale: 0.94,
+          transformOrigin: 'center center',
+          ease: 'studioFlow'
         })
         .to(
           '.hero-title',
@@ -62,15 +84,16 @@ export default function Hero({ reducedMotion }) {
             x: 0,
             skewY: 0,
             scale: 1,
-            ease: 'none'
+            ease: 'studioFlow'
           },
           '>-0.1'
         );
 
       gsap.to('.orb-a', {
-        y: 110,
-        x: 35,
-        scale: 1.15,
+        y: 120,
+        x: 45,
+        scale: 1.2,
+        transformOrigin: 'left center',
         ease: 'none',
         scrollTrigger: {
           trigger: 'main',
@@ -81,9 +104,10 @@ export default function Hero({ reducedMotion }) {
       });
 
       gsap.to('.orb-b', {
-        y: -90,
-        x: -25,
-        scale: 1.22,
+        y: -95,
+        x: -30,
+        scale: 1.24,
+        transformOrigin: 'right center',
         ease: 'none',
         scrollTrigger: {
           trigger: 'main',

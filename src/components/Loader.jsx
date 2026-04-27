@@ -1,5 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { CustomEase } from 'gsap/CustomEase';
+
+gsap.registerPlugin(CustomEase);
 
 export default function Loader({ onComplete, reducedMotion }) {
   const loaderRef = useRef(null);
@@ -13,14 +16,17 @@ export default function Loader({ onComplete, reducedMotion }) {
         return;
       }
 
+      CustomEase.create('loaderCurve', '0.65, 0, 0.35, 1');
       const counter = { value: 0 };
+
       const tl = gsap.timeline({
-        defaults: { ease: 'power2.out' },
+        defaults: { ease: 'loaderCurve' },
         onComplete: () => {
           gsap.to(loaderRef.current, {
             yPercent: -100,
-            duration: 0.9,
-            ease: 'power4.inOut',
+            duration: 0.95,
+            transformOrigin: 'center top',
+            ease: 'loaderCurve',
             onComplete
           });
         }
@@ -28,20 +34,44 @@ export default function Loader({ onComplete, reducedMotion }) {
 
       tl.fromTo(
         '.loader-word',
-        { yPercent: 120, skewX: -10, scale: 1.12 },
-        { yPercent: 0, skewX: 0, scale: 1, duration: 0.8 }
+        {
+          yPercent: 120,
+          skewX: -12,
+          scale: 1.15,
+          letterSpacing: '0.4em',
+          clipPath: 'polygon(0 0, 100% 0, 100% 12%, 0 12%)',
+          transformOrigin: 'left center'
+        },
+        {
+          yPercent: 0,
+          skewX: 0,
+          scale: 1,
+          letterSpacing: '0.24em',
+          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+          duration: 0.9
+        }
       )
         .to(counter, {
           value: 100,
-          duration: 2,
+          duration: 2.1,
           onUpdate: () => setProgress(Math.round(counter.value))
         })
-        .to('.loader-line', {
-          scaleX: 1,
-          transformOrigin: 'left center',
-          duration: 1.2
-        }, '<0.2')
-        .to('.loader-word', { yPercent: -40, skewX: 10, scale: 0.9, duration: 0.5 }, '-=0.3');
+        .to(
+          '.loader-line',
+          {
+            scaleX: 1,
+            transformOrigin: 'left center',
+            duration: 1.2
+          },
+          '<0.15'
+        )
+        .to('.loader-word', {
+          yPercent: -44,
+          skewX: 10,
+          scale: 0.9,
+          letterSpacing: '0.08em',
+          duration: 0.52
+        }, '-=0.3');
     }, loaderRef);
 
     return () => ctx.revert();
