@@ -11,11 +11,13 @@ export default function Navbar({ reducedMotion }) {
     const ctx = gsap.context(() => {
       if (reducedMotion) return;
 
-      gsap.fromTo(
-        navRef.current,
-        { y: -28, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.9, delay: 0.15, ease: 'power3.out' }
-      );
+      gsap.from(navRef.current, {
+        y: -120,
+        skewX: -8,
+        scale: 0.9,
+        duration: 1,
+        ease: 'power4.out'
+      });
 
       ScrollTrigger.create({
         start: 'top -120',
@@ -23,6 +25,7 @@ export default function Navbar({ reducedMotion }) {
         onUpdate: (self) => {
           gsap.to(navRef.current, {
             y: self.direction === 1 ? -90 : 0,
+            skewX: self.direction === 1 ? -2 : 0,
             duration: 0.35,
             ease: 'power2.out'
           });

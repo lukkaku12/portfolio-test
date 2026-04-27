@@ -1,5 +1,8 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const heroWords = ['Creative', 'Developer', '/', 'Portfolio'];
 
@@ -11,40 +14,82 @@ export default function Hero({ reducedMotion }) {
       if (reducedMotion) return;
 
       gsap.from('.hero-word', {
-        yPercent: 120,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 1,
-        ease: 'power4.out',
-        delay: 0.35
-      });
-
-      gsap.from('.hero-subtitle', {
-        y: 36,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.7
-      });
-
-      gsap.to('.orb-a', {
-        y: 70,
+        x: (index) => (index % 2 === 0 ? -320 : 320),
+        y: (index) => (index % 2 === 0 ? 50 : -50),
+        skewX: (index) => (index % 2 === 0 ? -14 : 14),
+        scale: 1.25,
+        ease: 'none',
         scrollTrigger: {
           trigger: '#inicio',
           scrub: true,
-          start: 'top top',
-          end: 'bottom top'
+          start: 'top 80%',
+          end: 'top 30%'
+        }
+      });
+
+      gsap.from('.hero-subtitle', {
+        x: -260,
+        skewX: -10,
+        scale: 1.1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero-subtitle',
+          scrub: true,
+          start: 'top 80%',
+          end: 'top 30%'
+        }
+      });
+
+      const titleTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#inicio',
+          scrub: true,
+          start: 'top 80%',
+          end: 'top 30%'
+        }
+      });
+
+      titleTl
+        .to('.hero-title', {
+          x: 35,
+          skewY: 3,
+          scale: 0.95,
+          ease: 'none'
+        })
+        .to(
+          '.hero-title',
+          {
+            x: 0,
+            skewY: 0,
+            scale: 1,
+            ease: 'none'
+          },
+          '>-0.1'
+        );
+
+      gsap.to('.orb-a', {
+        y: 110,
+        x: 35,
+        scale: 1.15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'main',
+          scrub: true,
+          start: 'top 80%',
+          end: 'top 30%'
         }
       });
 
       gsap.to('.orb-b', {
-        y: -60,
-        x: 35,
+        y: -90,
+        x: -25,
+        scale: 1.22,
+        ease: 'none',
         scrollTrigger: {
           trigger: 'main',
           scrub: true,
-          start: 'top top',
-          end: 'bottom bottom'
+          start: 'top 80%',
+          end: 'top 30%'
         }
       });
     }, sectionRef);

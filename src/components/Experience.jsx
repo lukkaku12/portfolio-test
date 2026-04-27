@@ -11,27 +11,43 @@ export default function Experience({ items, reducedMotion }) {
     const ctx = gsap.context(() => {
       if (reducedMotion) return;
 
-      gsap.from('.exp-head > *', {
-        y: 24,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
+      gsap.from('.exp-head h2', {
+        x: -300,
+        skewX: -12,
+        scale: 1.2,
+        ease: 'none',
         scrollTrigger: {
           trigger: '.exp-head',
-          start: 'top 78%'
+          scrub: true,
+          start: 'top 80%',
+          end: 'top 30%'
         }
       });
 
-      gsap.from('.exp-card', {
-        y: 44,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.14,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.exp-grid',
-          start: 'top 82%'
-        }
+      gsap.utils.toArray('.exp-card').forEach((card, index) => {
+        gsap.from(card, {
+          x: index % 2 === 0 ? -220 : 220,
+          y: 80,
+          skewX: index % 2 === 0 ? -8 : 8,
+          scale: 0.9,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: card,
+            scrub: true,
+            start: 'top 80%',
+            end: 'top 30%'
+          }
+        });
+
+        gsap.to(card, {
+          y: -20,
+          scrollTrigger: {
+            trigger: card,
+            scrub: true,
+            start: 'top 80%',
+            end: 'bottom 20%'
+          }
+        });
       });
     }, sectionRef);
 

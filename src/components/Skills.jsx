@@ -12,13 +12,17 @@ export default function Skills({ groups, reducedMotion }) {
       if (reducedMotion) return;
 
       gsap.from('.skill-group', {
-        y: 30,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.12,
+        x: (index) => (index % 2 === 0 ? -180 : 180),
+        y: 40,
+        skewY: (index) => (index % 2 === 0 ? -6 : 6),
+        scale: 0.9,
+        ease: 'none',
+        stagger: 0.06,
         scrollTrigger: {
           trigger: '.skills-grid',
-          start: 'top 80%'
+          scrub: true,
+          start: 'top 80%',
+          end: 'top 30%'
         }
       });
     }, sectionRef);

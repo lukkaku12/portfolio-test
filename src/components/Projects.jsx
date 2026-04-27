@@ -11,33 +11,42 @@ export default function Projects({ items, reducedMotion }) {
     const ctx = gsap.context(() => {
       if (reducedMotion) return;
 
-      gsap.from('.project-row', {
-        y: 36,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.09,
-        ease: 'power3.out',
+      gsap.from('.projects-title', {
+        x: 280,
+        skewX: 11,
+        scale: 1.18,
+        ease: 'none',
         scrollTrigger: {
-          trigger: '.projects-list',
-          start: 'top 82%'
+          trigger: '.projects-title',
+          scrub: true,
+          start: 'top 80%',
+          end: 'top 30%'
         }
       });
 
-      gsap.utils.toArray('.project-row').forEach((row) => {
-        row.addEventListener('mouseenter', () => {
-          gsap.to(row, {
-            x: 12,
-            duration: 0.3,
-            ease: 'power2.out'
-          });
+      gsap.utils.toArray('.project-row').forEach((row, index) => {
+        gsap.from(row, {
+          x: index % 2 === 0 ? -220 : 220,
+          skewX: index % 2 === 0 ? -9 : 9,
+          rotate: index % 2 === 0 ? -2 : 2,
+          scale: 0.92,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: row,
+            scrub: true,
+            start: 'top 80%',
+            end: 'top 30%'
+          }
         });
 
-        row.addEventListener('mouseleave', () => {
-          gsap.to(row, {
-            x: 0,
-            duration: 0.3,
-            ease: 'power2.out'
-          });
+        gsap.to(row, {
+          x: index % 2 === 0 ? 16 : -16,
+          scrollTrigger: {
+            trigger: row,
+            scrub: true,
+            start: 'top 70%',
+            end: 'bottom 25%'
+          }
         });
       });
     }, sectionRef);
@@ -49,7 +58,7 @@ export default function Projects({ items, reducedMotion }) {
     <section id="proyectos" className="section" ref={sectionRef}>
       <div className="section-head">
         <p className="section-tag">Proyectos destacados</p>
-        <h2>Selección curada de trabajos con enfoque editorial.</h2>
+        <h2 className="projects-title">Selección curada de trabajos con enfoque editorial.</h2>
       </div>
 
       <div className="projects-list">

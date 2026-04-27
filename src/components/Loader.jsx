@@ -28,8 +28,8 @@ export default function Loader({ onComplete, reducedMotion }) {
 
       tl.fromTo(
         '.loader-word',
-        { yPercent: 120, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 0.8 }
+        { yPercent: 120, skewX: -10, scale: 1.12 },
+        { yPercent: 0, skewX: 0, scale: 1, duration: 0.8 }
       )
         .to(counter, {
           value: 100,
@@ -41,7 +41,7 @@ export default function Loader({ onComplete, reducedMotion }) {
           transformOrigin: 'left center',
           duration: 1.2
         }, '<0.2')
-        .to('.loader-word', { opacity: 0, yPercent: -40, duration: 0.5 }, '-=0.3');
+        .to('.loader-word', { yPercent: -40, skewX: 10, scale: 0.9, duration: 0.5 }, '-=0.3');
     }, loaderRef);
 
     return () => ctx.revert();

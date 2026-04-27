@@ -11,16 +11,42 @@ export default function Contact({ reducedMotion }) {
     const ctx = gsap.context(() => {
       if (reducedMotion) return;
 
-      gsap.from('.contact-card > *', {
-        y: 24,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.1,
+      const contactTl = gsap.timeline({
         scrollTrigger: {
           trigger: '.contact-card',
-          start: 'top 82%'
+          scrub: true,
+          start: 'top 80%',
+          end: 'top 30%'
         }
       });
+
+      contactTl
+        .from('.contact-card h2', {
+          x: -260,
+          skewX: -10,
+          scale: 1.18,
+          ease: 'none'
+        })
+        .from(
+          '.contact-card p',
+          {
+            x: 220,
+            skewX: 8,
+            scale: 0.92,
+            ease: 'none'
+          },
+          '<'
+        )
+        .from(
+          '.contact-cta',
+          {
+            y: 80,
+            scale: 0.7,
+            skewY: -8,
+            ease: 'none'
+          },
+          '<0.05'
+        );
     }, sectionRef);
 
     return () => ctx.revert();
