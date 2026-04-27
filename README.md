@@ -1,33 +1,31 @@
-# Portfolio React + GSAP
+# Portfolio Landing (React + Vite + GSAP)
 
-## Deploy en Netlify (sin error MIME)
+Landing tipo portfolio inspirada en el ritmo visual de estudios creativos (sin copiar diseño exacto), con:
 
-Este proyecto usa **Vite**. En Netlify debes publicar la carpeta `dist` (no la raíz del repo).
+- Loader inicial 0% → 100%
+- Hero fullscreen editorial
+- Menú fijo con comportamiento en scroll
+- Secciones: Experiencia, Proyectos, Skills y Contacto
+- Animaciones GSAP + ScrollTrigger
+- Soporte para `prefers-reduced-motion`
 
-### Opción recomendada (automática)
-Este repo incluye `netlify.toml`, así que Netlify debe tomar:
-
-- **Build command:** `npm run build`
-- **Publish directory:** `dist`
-
-### Si lo configuras manualmente en Netlify UI
-- Build command: `npm run build`
-- Publish directory: `dist`
-
-## Desarrollo local
+## Ejecutar en local
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build local
+## Build de producción
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Nota sobre errores de Bugsnag bloqueado
-Mensajes como `sessions.bugsnag.com ... ERR_BLOCKED_BY_CLIENT` suelen venir de adblock/extensions.
-No bloquean el funcionamiento principal del sitio.
+## Deploy en Netlify
+
+Este repo ya incluye configuración en `netlify.toml`:
+
+- Build command: `npm run build`
+- Publish directory: `dist`
