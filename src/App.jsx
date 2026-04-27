@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Intro from './components/Intro';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
@@ -20,14 +24,14 @@ const EXPERIENCE = [
     company: 'Pulse Systems',
     period: '2022 — 2024',
     description:
-      'Construcción de design systems, interfaces SaaS y flujos complejos con foco en escalabilidad y UX de alto impacto.'
+      'Construcción de design systems y flujos SaaS complejos con foco en escalabilidad y claridad visual.'
   },
   {
     role: 'Creative Developer',
     company: 'Motion Lab',
     period: '2020 — 2022',
     description:
-      'Desarrollo de sitios de marca experimentales con narrativa por scroll, motion design y microinteracciones avanzadas.'
+      'Desarrollo de experiencias de marca con narrativa por scroll y motion design funcional.'
   }
 ];
 
@@ -37,36 +41,29 @@ const PROJECTS = [
     name: 'Aether Commerce',
     category: 'E-commerce Experience',
     year: '2026',
-    description: 'Plataforma inmersiva de lujo con transiciones fluidas y experiencia editorial de producto.'
+    description: 'Plataforma inmersiva de lujo con transiciones fluidas y narrativa editorial de producto.'
   },
   {
     id: '02',
     name: 'Pulse Intelligence',
     category: 'SaaS Dashboard',
     year: '2025',
-    description: 'Sistema de analítica en tiempo real con visualización dinámica y enfoque en decisiones rápidas.'
+    description: 'Sistema analítico en tiempo real con visualización limpia y foco en decisiones rápidas.'
   },
   {
     id: '03',
     name: 'Atelier Vert',
     category: 'Brand Website',
     year: '2024',
-    description: 'Sitio narrativo para estudio creativo con composición tipográfica agresiva y animación cinemática.'
-  },
-  {
-    id: '04',
-    name: 'Neon Archive',
-    category: 'Portfolio Platform',
-    year: '2023',
-    description: 'Biblioteca digital de casos con navegación inmersiva, filtros rápidos y visuales de alto contraste.'
+    description: 'Sitio de marca con composición tipográfica fuerte y microinteracciones sutiles.'
   }
 ];
 
 const SKILLS = {
   Frontend: ['React', 'Next.js', 'TypeScript', 'GSAP', 'Framer Motion'],
-  Backend: ['Node.js', 'Express', 'REST APIs', 'PostgreSQL', 'Prisma'],
-  Design: ['UI Systems', 'Prototyping', 'Interaction Design', 'Motion Principles'],
-  Tools: ['Vite', 'GitHub', 'Figma', 'Notion', 'Vercel/Netlify']
+  Backend: ['Node.js', 'Express', 'REST APIs', 'PostgreSQL'],
+  Design: ['UI Systems', 'Interaction Design', 'Prototyping', 'Motion Principles'],
+  Tools: ['Vite', 'GitHub', 'Figma', 'Notion', 'Netlify']
 };
 
 function useReducedMotionPreference() {
@@ -78,7 +75,6 @@ function useReducedMotionPreference() {
 
     updatePreference();
     mediaQuery.addEventListener('change', updatePreference);
-
     return () => mediaQuery.removeEventListener('change', updatePreference);
   }, []);
 
@@ -88,6 +84,33 @@ function useReducedMotionPreference() {
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const reducedMotion = useReducedMotionPreference();
+
+  useEffect(() => {
+    if (reducedMotion) return undefined;
+
+    const lenis = new Lenis({
+      duration: 1.15,
+      smoothWheel: true,
+      smoothTouch: false
+    });
+
+    const update = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(update);
+    gsap.ticker.lagSmoothing(0);
+    lenis.on('scroll', ScrollTrigger.update);
+
+    return () => {
+      gsap.ticker.remove(update);
+      lenis.destroy();
+    };
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (!isLoading) ScrollTrigger.refresh();
+  }, [isLoading]);
 
   return (
     <>
@@ -102,6 +125,7 @@ export default function App() {
 
         <main>
           <Hero reducedMotion={reducedMotion} />
+          <Intro reducedMotion={reducedMotion} />
           <Experience items={EXPERIENCE} reducedMotion={reducedMotion} />
           <Projects items={PROJECTS} reducedMotion={reducedMotion} />
           <Skills groups={SKILLS} reducedMotion={reducedMotion} />

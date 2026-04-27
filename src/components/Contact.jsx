@@ -1,58 +1,41 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact({ reducedMotion }) {
   const sectionRef = useRef(null);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    const ctx = gsap.context((self) => {
       if (reducedMotion) return;
+      const q = self.selector;
 
-      const contactTl = gsap.timeline({
+      gsap.from(q('.contact-title'), {
+        y: 50,
+        opacity: 0,
+        clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
+        duration: 0.9,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.contact-card',
-          scrub: true,
+          trigger: sectionRef.current,
           start: 'top 80%',
-          end: 'top 30%'
+          end: 'top 40%',
+          scrub: 1
         }
       });
 
-      contactTl
-        .from('.contact-card h2', {
-          x: -280,
-          skewX: -10,
-          scale: 1.2,
-          letterSpacing: '0.08em',
-          clipPath: 'polygon(0 0, 100% 0, 100% 20%, 0 20%)',
-          transformOrigin: 'left center',
-          ease: 'expo.out'
-        })
-        .from(
-          '.contact-card p',
-          {
-            x: 220,
-            skewX: 8,
-            scale: 0.92,
-            clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
-            transformOrigin: 'right center',
-            ease: 'expo.out'
-          },
-          '<'
-        )
-        .from(
-          '.contact-cta',
-          {
-            y: 80,
-            scale: 0.7,
-            skewY: -8,
-            transformOrigin: 'center bottom',
-            ease: 'expo.out'
-          },
-          '<0.05'
-        );
+      gsap.from(q('.contact-cta'), {
+        y: 30,
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: q('.contact-cta')[0],
+          start: 'top 90%',
+          end: 'top 50%',
+          scrub: 1
+        }
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -62,10 +45,10 @@ export default function Contact({ reducedMotion }) {
     <section id="contacto" className="section contact" ref={sectionRef}>
       <div className="contact-card">
         <p className="section-tag">Contacto</p>
-        <h2>¿Tienes una idea ambiciosa? Hagámosla realidad.</h2>
+        <h2 className="contact-title">¿Listo para construir una experiencia digital memorable?</h2>
         <p>
-          Disponible para colaborar en websites premium, productos digitales y experiencias
-          interactivas que dejen huella.
+          Disponible para colaboraciones, proyectos freelance y equipos que quieran elevar su
+          producto digital.
         </p>
         <a href="mailto:hola@tuportfolio.com" className="contact-cta">
           Iniciar proyecto

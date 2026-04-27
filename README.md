@@ -1,13 +1,16 @@
-# Portfolio Landing (React + Vite + GSAP)
+# Portfolio Landing (React + Vite + GSAP + Lenis)
 
-Landing tipo portfolio inspirada en el ritmo visual de estudios creativos (sin copiar diseño exacto), con:
+Landing tipo portfolio premium con estética de estudio creativo:
 
-- Loader inicial 0% → 100%
-- Hero fullscreen editorial
-- Menú fijo con comportamiento en scroll
-- Secciones: Experiencia, Proyectos, Skills y Contacto
-- Animaciones GSAP + ScrollTrigger
-- Soporte para `prefers-reduced-motion`
+- Loader inicial con contador
+- Hero fullscreen
+- Intro editorial centrada
+- Experiencia (timeline)
+- Proyectos destacados (lista editorial)
+- Skills
+- Contacto
+- Scroll suave con **Lenis**
+- Animaciones controladas con **GSAP + ScrollTrigger**
 
 ## Ejecutar en local
 
@@ -16,16 +19,14 @@ npm install
 npm run dev
 ```
 
-## Build de producción
+## Build producción
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Deploy en Netlify
-
-Este repo ya incluye configuración en `netlify.toml`:
+## Netlify
 
 - Build command: `npm run build`
 - Publish directory: `dist`
