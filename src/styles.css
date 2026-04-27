@@ -1,6 +1,5 @@
 :root {
   --bg: #040806;
-  --bg-soft: #0c1510;
   --panel: rgba(9, 20, 14, 0.58);
   --green: #2cff8f;
   --green-soft: #8fffc6;
@@ -14,20 +13,21 @@
 }
 
 html,
-body {
+body,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;
+  min-height: 100%;
+}
+
+body {
   overflow-x: hidden;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: radial-gradient(circle at 15% 15%, #123123 0%, transparent 30%),
     radial-gradient(circle at 80% 5%, #0a301f 0%, transparent 35%),
     linear-gradient(180deg, var(--bg) 0%, #020302 100%);
   color: var(--text);
-}
-
-body {
-  position: relative;
 }
 
 .noise {
