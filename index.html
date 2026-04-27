@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Inmersivo | Showcase</title>
+    <meta
+      name="description"
+      content="Portfolio de una sola página con enfoque inmersivo para experiencia, proyectos y presentación personal."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <header class="top-nav glass">
+      <span class="brand">TU NOMBRE</span>
+      <nav>
+        <a href="#about">Sobre mí</a>
+        <a href="#experience">Experiencia</a>
+        <a href="#projects">Proyectos</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero section" id="hero">
+        <p class="eyebrow reveal">Portfolio 2026</p>
+        <h1 class="title reveal">
+          Diseño experiencias digitales
+          <span>claras, inmersivas y memorables.</span>
+        </h1>
+        <p class="subtitle reveal">
+          Soy desarrollador/a con enfoque en productos modernos, animación y rendimiento.
+          Este espacio resume quién soy, cómo trabajo y qué he construido.
+        </p>
+        <div class="cta reveal">
+          <a href="#projects" class="btn btn-primary">Ver proyectos</a>
+          <a href="#contact" class="btn btn-ghost">Hablemos</a>
+        </div>
+      </section>
+
+      <section class="about section" id="about">
+        <div class="section-head reveal">
+          <p class="eyebrow">Sobre mí</p>
+          <h2>Minimalismo visual + impacto real en negocio.</h2>
+        </div>
+        <div class="about-grid">
+          <article class="glass reveal">
+            <h3>Enfoque</h3>
+            <p>
+              Creo interfaces limpias con microinteracciones que elevan la experiencia sin
+              sacrificar usabilidad.
+            </p>
+          </article>
+          <article class="glass reveal">
+            <h3>Especialidad</h3>
+            <p>
+              Frontend avanzado, arquitectura UI escalable, animación con GSAP y diseño
+              orientado a conversión.
+            </p>
+          </article>
+          <article class="glass reveal">
+            <h3>Objetivo</h3>
+            <p>
+              Construir productos que comuniquen valor desde el primer scroll y se sientan
+              premium en cada detalle.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="experience section" id="experience">
+        <div class="section-head reveal">
+          <p class="eyebrow">Experiencia</p>
+          <h2>Trayectoria enfocada en productos digitales de alto estándar.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <span class="year">2024 — Actual</span>
+            <h3>Senior Frontend Engineer · Studio X</h3>
+            <p>
+              Lideré rediseño del sitio principal, mejorando engagement y performance con
+              animaciones fluidas y arquitectura modular.
+            </p>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="year">2022 — 2024</span>
+            <h3>Frontend Developer · Product Lab</h3>
+            <p>
+              Implementé design systems y flujos interactivos para plataformas B2B,
+              reduciendo tiempos de desarrollo y aumentando consistencia visual.
+            </p>
+          </article>
+          <article class="timeline-item reveal">
+            <span class="year">2020 — 2022</span>
+            <h3>UI Developer · Creative Agency</h3>
+            <p>
+              Desarrollé experiencias de marca con storytelling visual y motion design para
+              campañas globales.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="projects section" id="projects">
+        <div class="section-head reveal">
+          <p class="eyebrow">Proyectos</p>
+          <h2>Casos donde diseño, código y estrategia convergen.</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card reveal">
+            <p class="tag">Web Experience</p>
+            <h3>Neon Commerce</h3>
+            <p>
+              E-commerce inmersivo con storytelling por scroll y foco en conversión premium.
+            </p>
+          </article>
+          <article class="project-card reveal">
+            <p class="tag">SaaS Platform</p>
+            <h3>Pulse Analytics</h3>
+            <p>
+              Dashboard interactivo para visualización de KPIs con diseño claro y altamente
+              usable.
+            </p>
+          </article>
+          <article class="project-card reveal">
+            <p class="tag">Brand Site</p>
+            <h3>Atelier Nøir</h3>
+            <p>
+              Sitio editorial para marca de lujo, con transiciones cinemáticas y tipografía
+              protagonista.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact section" id="contact">
+        <div class="contact-card glass reveal">
+          <p class="eyebrow">Contacto</p>
+          <h2>¿Construimos algo memorable juntos?</h2>
+          <p>
+            Disponible para proyectos freelance, colaboraciones de producto o roles full-time.
+          </p>
+          <a class="btn btn-primary" href="mailto:tuemail@correo.com">tuemail@correo.com</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
